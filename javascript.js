@@ -1,17 +1,34 @@
 let humanScore = 0;
 let computerScore = 0;
 
+//add variables for each choice and the result
+const btnRock = document.querySelector("button.buttonRock");
+const btnPaper = document.querySelector("button.buttonPaper");
+const btnScissors = document.querySelector("button.buttonScissors");
+const roundResult = document.querySelector("div.roundResult");
+
+//play a round when a button is clicked
+btnRock.addEventListener("click", () => playRound("rock", getComputerchoice()));
+btnPaper.addEventListener("click", () =>
+  playRound("paper", getComputerchoice())
+);
+btnScissors.addEventListener("click", () =>
+  playRound("scissors", getComputerchoice())
+);
+
 function getComputerchoice() {
   let computer = Math.random();
+  let computerText = document.createElement("p");
+  roundResult.appendChild(computerText);
 
   if (computer <= 0.3) {
-    console.log("the Computer chose Rock");
+    computerText.textContent = "the Computer chose Rock";
     return (computer = "rock");
   } else if (computer <= 0.6) {
-    console.log("the Computer chose Paper");
+    computerText.textContent = "the Computer chose Paper";
     return (computer = "paper");
   } else {
-    console.log("the Computer chose Scissors");
+    computerText.textContent = "the Computer chose Scissors";
     return (computer = "scissors");
   }
 }
@@ -35,48 +52,46 @@ function getHumanchoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+  let resultText = document.createElement("p");
+  roundResult.appendChild(resultText);
+
   if (humanChoice == "rock" && computerChoice == "paper") {
-    console.log("You lose! Paper beats Rock");
+    resultText.textContent = "You lose! Paper beats Rock";
     return computerScore++;
   } else if (humanChoice == "rock" && computerChoice == "scissors") {
-    console.log("You win! Rock beats Scissors");
+    resultText.textContent = "You win! Rock beats Scissors";
     return humanScore++;
   } else if (humanChoice == "paper" && computerChoice == "rock") {
-    console.log("You win! Paper beats Rock");
+    resultText.textContent = "You win! Paper beats Rock";
     return humanScore++;
   } else if (humanChoice == "paper" && computerChoice == "scissors") {
-    console.log("You lose! Scissors beats Paper");
+    resultText.textContent = "You lose! Scissors beats Paper";
     return computerScore++;
   } else if (humanChoice == "scissors" && computerChoice == "rock") {
-    console.log("You lose! Rock beats Scissors");
+    resultText.textContent = "You lose! Rock beats Scissors";
     return computerScore++;
   } else if (humanChoice == "scissors" && computerChoice == "paper") {
-    console.log("You win! Scissors beats Paper");
+    resultText.textContent = "You win! Scissors beats Paper";
     return humanScore++;
   } else {
-    console.log("It's a tie!");
-  }
-}
-// const humanSelection = getHumanchoice();
-// const computerSelection = getComputerchoice();
-// playRound(humanSelection, computerSelection)
-
-function playGame() {
-  for (let i = 0; i <= 4; i++) {
-    playRound(getHumanchoice(), getComputerchoice());
-  }
-
-  if (humanScore > computerScore) {
-    console.log(
-      `You won the game with a score of ${humanScore}! The computer won ${computerScore} rounds`
-    );
-  } else if (computerScore > humanScore) {
-    console.log(
-      `The computer won the game with a score of ${computerScore}! You won ${humanScore} rounds`
-    );
-  } else {
-    console.log("The game came out as a tie!");
+    resultText.textContent = "It's a tie!";
   }
 }
 
-playGame();
+// function playGame() {
+//   for (let i = 0; i <= 4; i++) {
+//     playRound(getHumanchoice(), getComputerchoice());
+//   }
+
+//   if (humanScore > computerScore) {
+//     console.log(
+//       `You won the game with a score of ${humanScore}! The computer won ${computerScore} rounds`
+//     );
+//   } else if (computerScore > humanScore) {
+//     console.log(
+//       `The computer won the game with a score of ${computerScore}! You won ${humanScore} rounds`
+//     );
+//   } else {
+//     console.log("The game came out as a tie!");
+//   }
+// }
